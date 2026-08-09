@@ -76,23 +76,34 @@
     allow="geolocation; microphone; camera">
   </iframe>
 
-<!-- Tempatkan di index.html Repository GitHub (sebelum </body>) -->
   <script>
-    window.addEventListener("message", function(event) {
-      if (event.data === "keluar_aplikasi") {
-        
+  window.addEventListener("message", function(event) {
+    // Memastikan pesan yang diterima adalah "keluar_aplikasi"
+    if (event.data === "keluar_aplikasi") {
+      
+      // 1. Coba tutup jendela/tab browser jika memungkinkan (PWA/Mobile)
+      try {
+        window.open('', '_self', '');
         window.close();
-
-        document.body.innerHTML = `
-          <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; font-family:Arial, sans-serif; text-align:center; background-color:#f4f6f9; padding:20px;">
-            <i class="fa-solid fa-circle-check" style="font-size: 4rem; color: #38a169; margin-bottom: 16px;"></i>
-            <h2 style="color:#2d3748; margin-bottom:8px;">Anda telah keluar dari aplikasi</h2>
-            <p style="color:#718096; font-size:0.95rem;">Terima kasih telah menggunakan REGISTER PUS.<br>Silakan tutup jendela browser ini.</p>
-          </div>
-        `;
+      } catch (e) {
+        console.log("Window close diblokir oleh browser:", e);
       }
-    });
-  </script>
+
+      // 2. Ganti tampilan layar utama GitHub Pages dengan layar penutup yang rapi
+      document.body.innerHTML = `
+        <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; font-family:'Segoe UI', Arial, sans-serif; text-align:center; background-color:#f4f6f9; padding:20px; box-sizing:border-box;">
+          <div style="background:#ffffff; padding:30px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08); max-width:400px; width:100%;">
+            <div style="font-size: 4rem; color: #38a169; margin-bottom: 16px;">✔️</div>
+            <h2 style="color:#2d3748; margin-bottom:10px; font-size:20px;">Anda Telah Keluar</h2>
+            <p style="color:#718096; font-size:14px; line-height:1.5; margin:0;">
+              Terima kasih telah menggunakan <b>REGISTER PUS</b>.<br>Silakan tutup jendela browser ini.
+            </p>
+          </div>
+        </div>
+      `;
+    }
+  });
+</script>
   
 </body>
 </html>
