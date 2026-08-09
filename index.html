@@ -76,5 +76,23 @@
     allow="geolocation; microphone; camera">
   </iframe>
 
+<!-- Tempatkan di index.html Repository GitHub (sebelum </body>) -->
+  <script>
+    window.addEventListener("message", function(event) {
+      if (event.data === "keluar_aplikasi") {
+        
+        window.close();
+
+        document.body.innerHTML = `
+          <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; font-family:Arial, sans-serif; text-align:center; background-color:#f4f6f9; padding:20px;">
+            <i class="fa-solid fa-circle-check" style="font-size: 4rem; color: #38a169; margin-bottom: 16px;"></i>
+            <h2 style="color:#2d3748; margin-bottom:8px;">Anda telah keluar dari aplikasi</h2>
+            <p style="color:#718096; font-size:0.95rem;">Terima kasih telah menggunakan REGISTER PUS.<br>Silakan tutup jendela browser ini.</p>
+          </div>
+        `;
+      }
+    });
+  </script>
+  
 </body>
 </html>
